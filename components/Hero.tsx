@@ -1,11 +1,13 @@
+
 import React from 'react';
 import { PageView } from '../types';
 
 interface HeroProps {
   onCtaClick: () => void;
+  imageUrl: string;
 }
 
-const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
+const Hero: React.FC<HeroProps> = ({ onCtaClick, imageUrl }) => {
   return (
     <div className="relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto">
@@ -43,9 +45,10 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <button
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-brand-700 bg-brand-100 hover:bg-brand-200 md:py-4 md:text-lg transition-all"
+                    disabled
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-slate-400 bg-slate-100 cursor-not-allowed md:py-4 md:text-lg transition-all"
                   >
-                    Join Community
+                    Coming Soon
                   </button>
                 </div>
               </div>
@@ -55,9 +58,9 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       </div>
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
-          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90"
-          src="https://picsum.photos/id/1015/1600/1200" 
-          alt="Ethereal landscape with clouds and water"
+          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90 transition-opacity duration-700"
+          src={imageUrl} 
+          alt="Ethereal landscape with peaceful light"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent lg:via-white/20"></div>
       </div>

@@ -1,3 +1,4 @@
+
 export interface Service {
   id: string;
   title: string;
@@ -19,6 +20,7 @@ export interface BlogPost {
   id: string;
   title: string;
   excerpt: string;
+  content: string;
   date: string;
   imageUrl: string;
   category: string;
@@ -36,5 +38,7 @@ export enum PageView {
   SERVICES = 'SERVICES',
   COMPANION = 'COMPANION',
   BLOG = 'BLOG',
+  BLOG_POST = 'BLOG_POST',
+  REVIEWS = 'REVIEWS',
   CONTACT = 'CONTACT'
 }
