@@ -7,7 +7,7 @@
     "start": "node server.js",
     "prestart": "npm run build",
     "dev": "node server.js",
-    "build": "mkdir -p dist && cp index.html dist/ && esbuild src/index.tsx --bundle --outfile=dist/js/app.js --format=esm --external:react --external:react-dom"
+    "build": "mkdir -p dist && cp index.html dist/ && esbuild src/index.tsx --bundle --outfile=dist/js/app.js --format=esm --external:react --external:react-dom --external:react/jsx-runtime --external:react-dom/client"
   },
   "dependencies": {
     "@google/genai": "^1.31.0",
