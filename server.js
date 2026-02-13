@@ -79,7 +79,7 @@ Keep responses concise (under 150 words) unless asked for more detail.
 
 // Handle SPA routing - send index.html for any request that doesn't match a file
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
