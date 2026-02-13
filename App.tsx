@@ -16,12 +16,12 @@ const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<PageView>(PageView.HOME);
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [apiKey, setApiKey] = useState('');
 
   // Managed content state for settings
   const [heroImageUrl, setHeroImageUrl] = useState(DEFAULT_HERO_IMAGE);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>(BLOG_POSTS);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(TESTIMONIALS);
+  const [geminiApiKey, setGeminiApiKey] = useState(localStorage.getItem('dez_gemini_api_key') || '');
 
   // Load state from localStorage on mount
   useEffect(() => {
@@ -33,9 +33,6 @@ const App: React.FC = () => {
 
     const savedTestimonials = localStorage.getItem('dez_testimonials');
     if (savedTestimonials) setTestimonials(JSON.parse(savedTestimonials));
-
-    const savedApiKey = localStorage.getItem('dez_api_key');
-    if (savedApiKey) setApiKey(savedApiKey);
 
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1).toUpperCase();
@@ -68,8 +65,8 @@ const App: React.FC = () => {
   }, [testimonials]);
 
   useEffect(() => {
-    localStorage.setItem('dez_api_key', apiKey);
-  }, [apiKey]);
+    localStorage.setItem('dez_gemini_api_key', geminiApiKey);
+  }, [geminiApiKey]);
 
   const navigateTo = (view: PageView) => {
     window.location.hash = view.toLowerCase();
@@ -112,11 +109,11 @@ const App: React.FC = () => {
       setHeroImageUrl(DEFAULT_HERO_IMAGE);
       setBlogPosts(BLOG_POSTS);
       setTestimonials(TESTIMONIALS);
-      setApiKey('');
+      setGeminiApiKey('');
       localStorage.removeItem('dez_hero_image');
       localStorage.removeItem('dez_blog_posts');
       localStorage.removeItem('dez_testimonials');
-      localStorage.removeItem('dez_api_key');
+      localStorage.removeItem('dez_gemini_api_key');
     }
   };
 
@@ -124,20 +121,20 @@ const App: React.FC = () => {
     switch (currentView) {
       case PageView.REVIEWS:
         return <Reviews testimonials={testimonials} onAddReview={addTestimonial} />;
-
+        
       case PageView.COMPANION:
         return (
           <div className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ethereal-gradient min-h-screen">
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-serif font-bold text-slate-900 sm:text-4xl">Grief Companion AI</h1>
+              <h1 className="text-3xl font-serif font-bold text-slate-900 sm:text-4xl">Cross and Over Life</h1>
               <p className="mt-3 max-w-2xl mx-auto text-xl text-slate-500 sm:mt-4">
                 A safe, judgment-free space to process your emotions.
               </p>
             </div>
-            <GriefCompanion apiKey={apiKey} />
+            <GriefCompanion />
           </div>
         );
-
+      
       case PageView.SERVICES:
         return (
           <div className="py-16 bg-white">
@@ -174,12 +171,12 @@ const App: React.FC = () => {
                     <div className="flex-shrink-0 relative overflow-hidden bg-slate-100">
                       <img className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110" src={post.imageUrl} alt={post.title} />
                       <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <button
+                         <button 
                           onClick={() => handlePostClick(post)}
                           className="bg-white text-slate-900 px-4 py-2 rounded-full font-medium shadow-lg"
-                        >
-                          Read Article
-                        </button>
+                         >
+                           Read Article
+                         </button>
                       </div>
                     </div>
                     <div className="flex-1 bg-white p-6 flex flex-col justify-between">
@@ -214,7 +211,7 @@ const App: React.FC = () => {
 
       case PageView.CONTACT:
         return (
-          <div className="bg-white py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
+            <div className="bg-white py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
             <div className="relative max-w-xl mx-auto">
               <div className="text-center">
                 <h2 className="text-3xl font-serif font-extrabold tracking-tight text-slate-900 sm:text-4xl">Get in touch</h2>
@@ -258,7 +255,7 @@ const App: React.FC = () => {
         return (
           <>
             <Hero onCtaClick={() => navigateTo(PageView.SERVICES)} imageUrl={heroImageUrl} />
-
+            
             {/* Value Props Section */}
             <div className="py-12 bg-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -279,7 +276,7 @@ const App: React.FC = () => {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-end mb-12">
                   <h2 className="text-3xl font-serif font-bold text-slate-900">Healing Stories</h2>
-                  <button
+                  <button 
                     onClick={() => navigateTo(PageView.REVIEWS)}
                     className="text-brand-600 font-bold hover:text-brand-700 transition-colors flex items-center"
                   >
@@ -320,7 +317,7 @@ const App: React.FC = () => {
                   onClick={() => navigateTo(PageView.COMPANION)}
                   className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-brand-600 bg-white hover:bg-brand-50 sm:w-auto"
                 >
-                  Try Grief Companion AI
+                  Try Cross and Over Life
                 </button>
               </div>
             </div>
@@ -331,14 +328,14 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-200 selection:text-brand-900">
-      <Navbar
-        currentView={currentView}
-        setView={navigateTo}
+      <Navbar 
+        currentView={currentView} 
+        setView={navigateTo} 
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
       {renderContent()}
-
-      <SettingsModal
+      
+      <SettingsModal 
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
         heroImageUrl={heroImageUrl}
@@ -350,8 +347,8 @@ const App: React.FC = () => {
         onAddTestimonial={addTestimonial}
         onDeleteTestimonial={deleteTestimonial}
         onReset={handleResetSettings}
-        apiKey={apiKey}
-        setApiKey={setApiKey}
+        geminiApiKey={geminiApiKey}
+        setGeminiApiKey={setGeminiApiKey}
       />
 
       <footer className="bg-white border-t border-slate-200 mt-auto">
@@ -379,9 +376,9 @@ const App: React.FC = () => {
             </div>
           </nav>
           <div className="mt-8 flex justify-center space-x-6">
-            <span className="text-slate-400">
-              &copy; 2024 Crossing Over with Dez. All rights reserved.
-            </span>
+             <span className="text-slate-400">
+                &copy; 2024 Crossing Over with Dez. All rights reserved.
+             </span>
           </div>
         </div>
       </footer>
