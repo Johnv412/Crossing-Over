@@ -9,9 +9,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware for parsing JSON bodies
 app.use(express.json());
 
-// Serve static files from 'public' directory (build artifacts)
-app.use(express.static(path.join(__dirname, 'public')));
-// Also serve from root for assets if needed, but prefer public
+// Serve static files from 'dist' directory (build artifacts)
+app.use(express.static(path.join(__dirname, 'dist')));
+// Also serve from root for assets if needed, but prefer dist
 app.use(express.static(__dirname));
 
 // Health Check Endpoint
@@ -31,7 +31,7 @@ app.post('/api/chat', async (req, res) => {
     }
 
     const ai = new GoogleGenAI({ apiKey });
-    
+
     // Construct prompt from history + system instruction
     // Note: In a production app, you might want to manage history more robustly
     // For now, we trust the client's history or reconstruct it.
