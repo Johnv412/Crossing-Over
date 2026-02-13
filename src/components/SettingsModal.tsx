@@ -14,6 +14,8 @@ interface SettingsModalProps {
   onAddTestimonial: (t: Omit<Testimonial, 'id'>) => void;
   onDeleteTestimonial: (id: string) => void;
   onReset: () => void;
+  apiKey: string;
+  setApiKey: (key: string) => void;
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -27,7 +29,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   updateTestimonialAvatar,
   onAddTestimonial,
   onDeleteTestimonial,
-  onReset
+  onReset,
+  apiKey,
+  setApiKey
 }) => {
   const [newReview, setNewReview] = useState({ name: '', location: '', text: '', avatar: '' });
 
@@ -66,6 +70,39 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
 
             <div className="space-y-8 max-h-[65vh] overflow-y-auto pr-2 custom-scrollbar">
+              {/* AI Connection Section */}
+              <section className="bg-brand-50 p-4 rounded-xl border border-brand-200 shadow-sm">
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="p-1.5 bg-brand-600 rounded-md text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <h4 className="text-sm font-bold text-brand-900 uppercase tracking-wider">AI Grief Companion Setup</h4>
+                </div>
+                <div className="space-y-3">
+                  <p className="text-xs text-brand-700 leading-relaxed">
+                    To enable the Grief Companion, please enter your Gemini API Key below. Your key is stored locally in your browser and used only for your chat sessions.
+                  </p>
+                  <div>
+                    <label className="block text-[10px] font-bold text-brand-600 uppercase mb-1 ml-1">Gemini API Key</label>
+                    <input
+                      type="password"
+                      value={apiKey}
+                      onChange={(e) => setApiKey(e.target.value)}
+                      placeholder="Enter your API Key here..."
+                      className="w-full px-3 py-2 text-sm border border-brand-200 rounded-lg focus:ring-brand-500 focus:border-brand-500 bg-white"
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] text-brand-500 italic px-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>You can get a free key from Google AI Studio.</span>
+                  </div>
+                </div>
+              </section>
+
               {/* Hero Section */}
               <section className="bg-slate-50 p-4 rounded-xl">
                 <h4 className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Hero Image</h4>
@@ -90,27 +127,27 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   <input
                     type="text"
                     value={newReview.name}
-                    onChange={(e) => setNewReview({...newReview, name: e.target.value})}
+                    onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
                     placeholder="Reviewer Name"
                     className="w-full px-3 py-2 text-sm border border-slate-200 rounded-md"
                   />
                   <input
                     type="text"
                     value={newReview.location}
-                    onChange={(e) => setNewReview({...newReview, location: e.target.value})}
+                    onChange={(e) => setNewReview({ ...newReview, location: e.target.value })}
                     placeholder="Location (e.g. Austin, TX)"
                     className="w-full px-3 py-2 text-sm border border-slate-200 rounded-md"
                   />
                   <input
                     type="text"
                     value={newReview.avatar}
-                    onChange={(e) => setNewReview({...newReview, avatar: e.target.value})}
+                    onChange={(e) => setNewReview({ ...newReview, avatar: e.target.value })}
                     placeholder="Avatar Image URL (Optional)"
                     className="w-full px-3 py-2 text-sm border border-slate-200 rounded-md"
                   />
                   <textarea
                     value={newReview.text}
-                    onChange={(e) => setNewReview({...newReview, text: e.target.value})}
+                    onChange={(e) => setNewReview({ ...newReview, text: e.target.value })}
                     placeholder="Their Message..."
                     className="w-full px-3 py-2 text-sm border border-slate-200 rounded-md"
                     rows={2}
@@ -133,15 +170,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                       <img src={t.avatar} className="w-10 h-10 rounded-full object-cover bg-white" alt={t.name} />
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between">
-                           <p className="text-xs font-bold text-slate-900 truncate">{t.name}</p>
-                           <button 
+                          <p className="text-xs font-bold text-slate-900 truncate">{t.name}</p>
+                          <button
                             onClick={() => onDeleteTestimonial(t.id)}
                             className="text-red-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"
-                           >
+                          >
                             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
-                           </button>
+                          </button>
                         </div>
                         <p className="text-[10px] text-slate-500 mb-1">{t.location}</p>
                         <input
@@ -180,7 +217,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
               </section>
             </div>
           </div>
-          
+
           <div className="bg-slate-50 px-6 py-4 sm:px-8 flex flex-col sm:flex-row gap-3 justify-between items-center">
             <button
               onClick={onReset}

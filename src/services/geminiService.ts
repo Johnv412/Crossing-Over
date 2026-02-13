@@ -1,4 +1,4 @@
-export const sendMessageToGemini = async (history: string[], newMessage: string): Promise<string> => {
+export const sendMessageToGemini = async (history: string[], newMessage: string, apiKey: string): Promise<string> => {
   try {
     const response = await fetch('/api/chat', {
       method: 'POST',
@@ -8,6 +8,7 @@ export const sendMessageToGemini = async (history: string[], newMessage: string)
       body: JSON.stringify({
         history,
         newMessage,
+        apiKey
       }),
     });
 

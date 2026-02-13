@@ -22,12 +22,12 @@ app.get('/health', (req, res) => {
 // Gemini API Proxy
 app.post('/api/chat', async (req, res) => {
   try {
-    const { history, newMessage } = req.body;
-    const apiKey = process.env.API_KEY;
+    const { history, newMessage, apiKey: clientApiKey } = req.body;
+    const apiKey = process.env.API_KEY || clientApiKey;
 
     if (!apiKey) {
       console.error("API_KEY is missing");
-      return res.status(500).json({ error: "Server configuration error: API Key missing" });
+      return res.status(500).json({ error: "Server configuration error: API Key missing. Please set it in Settings." });
     }
 
     const ai = new GoogleGenAI({ apiKey });
@@ -64,7 +64,7 @@ Keep responses concise (under 150 words) unless asked for more detail.
     `;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: 'gemini-1.5-flash',
       contents: prompt,
     });
 

@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { sendMessageToGemini } from '../services/geminiService';
 import { ChatMessage } from '../types';
 
-const GriefCompanion: React.FC = () => {
+interface GriefCompanionProps {
+  apiKey: string;
+}
+
+const GriefCompanion: React.FC<GriefCompanionProps> = ({ apiKey }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 'welcome',
@@ -36,8 +40,8 @@ const GriefCompanion: React.FC = () => {
     try {
       // Prepare history context for the API
       const historyContext = messages.map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.text}`);
-      
-      const responseText = await sendMessageToGemini(historyContext, userMsg.text);
+
+      const responseText = await sendMessageToGemini(historyContext, userMsg.text, apiKey);
 
       const aiMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -85,11 +89,10 @@ const GriefCompanion: React.FC = () => {
             className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-[80%] rounded-2xl px-5 py-3 shadow-sm ${
-                msg.role === 'user'
+              className={`max-w-[80%] rounded-2xl px-5 py-3 shadow-sm ${msg.role === 'user'
                   ? 'bg-brand-600 text-white rounded-br-none'
                   : 'bg-white text-slate-700 border border-slate-200 rounded-bl-none'
-              }`}
+                }`}
             >
               <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
               <span className={`text-[10px] block mt-2 opacity-70 ${msg.role === 'user' ? 'text-brand-100 text-right' : 'text-slate-400'}`}>
