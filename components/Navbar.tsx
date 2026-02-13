@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
   const navLinks = [
     { label: 'Home', value: PageView.HOME },
     { label: 'Services', value: PageView.SERVICES },
-    { label: 'Grief Companion AI', value: PageView.COMPANION },
+    { label: 'Cross and Over Life', value: PageView.COMPANION },
     { label: 'Reviews', value: PageView.REVIEWS },
     { label: 'Blog', value: PageView.BLOG },
     { label: 'Contact', value: PageView.CONTACT },
