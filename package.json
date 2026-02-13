@@ -7,7 +7,7 @@
     "start": "node server.js",
     "prestart": "npm run build",
     "dev": "node server.js",
-    "build": "mkdir -p dist && cp index.html dist/ && esbuild src/index.tsx --bundle --outfile=dist/js/app.js --format=esm --external:react --external:react-dom --external:react/jsx-runtime --external:react-dom/client"
+    "build": "vite build"
   },
   "dependencies": {
     "@google/genai": "^1.31.0",
@@ -15,6 +15,8 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
     "esbuild": "^0.27.3"
   },
   "engines": {
