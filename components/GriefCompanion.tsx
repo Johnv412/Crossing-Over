@@ -47,14 +47,14 @@ const GriefCompanion: React.FC = () => {
     {
       id: 'welcome',
       role: 'model',
-      text: "Hello. I am Cross and Over Life. I can listen to your voice or read your messages. How is your heart feeling in this moment?",
+      text: "Hello. I am Crossing Over Live. I can listen to your voice or read your messages. How is your heart feeling in this moment?",
       timestamp: new Date()
     }
   ]);
   const [isVoiceActive, setIsVoiceActive] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
   const [input, setInput] = useState('');
-  
+
   const audioContexts = useRef<{ input: AudioContext; output: AudioContext } | null>(null);
   const sessionRef = useRef<any>(null);
   const nextStartTimeRef = useRef(0);
@@ -72,7 +72,7 @@ const GriefCompanion: React.FC = () => {
       sessionRef.current = null;
     }
     for (const source of sourcesRef.current) {
-      try { source.stop(); } catch(e) {}
+      try { source.stop(); } catch (e) { }
     }
     sourcesRef.current.clear();
     setIsVoiceActive(false);
@@ -97,7 +97,7 @@ const GriefCompanion: React.FC = () => {
 
     try {
       const ai = new GoogleGenAI({ apiKey });
-      
+
       if (!audioContexts.current) {
         audioContexts.current = {
           input: new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 16000 }),
@@ -113,17 +113,17 @@ const GriefCompanion: React.FC = () => {
           speechConfig: {
             voiceConfig: { prebuiltVoiceConfig: { voiceName: 'Kore' } },
           },
-          outputAudioTranscription: {}, 
-          systemInstruction: 'You are Cross and Over Life, a compassionate companion for those experiencing loss. Speak warmly and offer spiritual comfort. Keep responses empathetic and succinct. When someone types to you, respond naturally with your voice.',
+          outputAudioTranscription: {},
+          systemInstruction: 'You are Crossing Over Live, a compassionate companion for those experiencing loss. Speak warmly and offer spiritual comfort. Keep responses empathetic and succinct. When someone types to you, respond naturally with your voice.',
         },
         callbacks: {
           onopen: () => {
             setIsConnecting(false);
             setIsVoiceActive(true);
-            
+
             const source = audioContexts.current!.input.createMediaStreamSource(stream);
             const scriptProcessor = audioContexts.current!.input.createScriptProcessor(4096, 1, 1);
-            
+
             scriptProcessor.onaudioprocess = (e) => {
               const inputData = e.inputBuffer.getChannelData(0);
               const int16 = new Int16Array(inputData.length);
@@ -180,7 +180,7 @@ const GriefCompanion: React.FC = () => {
             }
 
             if (message.serverContent?.interrupted) {
-              for (const s of sourcesRef.current) { try { s.stop(); } catch(e) {} }
+              for (const s of sourcesRef.current) { try { s.stop(); } catch (e) { } }
               sourcesRef.current.clear();
               nextStartTimeRef.current = 0;
             }
@@ -205,7 +205,7 @@ const GriefCompanion: React.FC = () => {
   const handleSendText = async () => {
     const textToSend = input.trim();
     if (!textToSend) return;
-    
+
     const userMsg: ChatMessage = {
       id: Date.now().toString(),
       role: 'user',
@@ -222,7 +222,7 @@ const GriefCompanion: React.FC = () => {
         messages.map(m => `${m.role === 'user' ? 'User' : 'Companion'}: ${m.text}`),
         textToSend
       );
-      
+
       const modelMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         role: 'model',
@@ -243,21 +243,20 @@ const GriefCompanion: React.FC = () => {
             </svg>
           </div>
           <div>
-            <h2 className="text-xl font-serif font-bold">Cross and Over Life</h2>
+            <h2 className="text-xl font-serif font-bold">Crossing Over Live</h2>
             <p className="text-xs text-brand-100 uppercase tracking-widest font-bold">
               {isVoiceActive ? 'Voice Connection Active' : isConnecting ? 'Connecting...' : 'Ready to listen'}
             </p>
           </div>
         </div>
-        
+
         <button
           onClick={startVoiceSession}
           disabled={isConnecting}
-          className={`px-6 py-2 rounded-full font-bold text-sm transition-all shadow-lg ${
-            isVoiceActive 
-              ? 'bg-red-500 hover:bg-red-600 text-white' 
+          className={`px-6 py-2 rounded-full font-bold text-sm transition-all shadow-lg ${isVoiceActive
+              ? 'bg-red-500 hover:bg-red-600 text-white'
               : 'bg-white text-brand-700 hover:bg-brand-50'
-          }`}
+            }`}
         >
           {isVoiceActive ? 'End Voice Mode' : isConnecting ? 'Connecting...' : 'Start Voice Mode'}
         </button>
@@ -276,9 +275,8 @@ const GriefCompanion: React.FC = () => {
       <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-50">
         {messages.map((msg) => (
           <div key={msg.id} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[85%] rounded-2xl px-6 py-4 shadow-sm ${
-              msg.role === 'user' ? 'bg-brand-600 text-white rounded-br-none' : 'bg-white text-slate-700 border border-slate-100 rounded-bl-none'
-            }`}>
+            <div className={`max-w-[85%] rounded-2xl px-6 py-4 shadow-sm ${msg.role === 'user' ? 'bg-brand-600 text-white rounded-br-none' : 'bg-white text-slate-700 border border-slate-100 rounded-bl-none'
+              }`}>
               <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
               <span className={`text-[10px] block mt-2 opacity-60 ${msg.role === 'user' ? 'text-right' : ''}`}>
                 {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -311,8 +309,8 @@ const GriefCompanion: React.FC = () => {
         <div className="mt-3 flex justify-between items-center px-1">
           <p className="text-[10px] text-slate-400">All responses will appear in the log as she speaks them.</p>
           <div className="flex items-center gap-1">
-             <div className={`w-2 h-2 rounded-full ${isVoiceActive ? 'bg-green-500' : 'bg-slate-300'}`}></div>
-             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Live Session</span>
+            <div className={`w-2 h-2 rounded-full ${isVoiceActive ? 'bg-green-500' : 'bg-slate-300'}`}></div>
+            <span className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Live Session</span>
           </div>
         </div>
       </div>

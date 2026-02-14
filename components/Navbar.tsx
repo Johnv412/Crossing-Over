@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
   const navLinks = [
     { label: 'Home', value: PageView.HOME },
     { label: 'Services', value: PageView.SERVICES },
-    { label: 'Cross and Over Life', value: PageView.COMPANION },
+    { label: 'Crossing Over Live', value: PageView.COMPANION },
     { label: 'Reviews', value: PageView.REVIEWS },
     { label: 'Blog', value: PageView.BLOG },
     { label: 'Contact', value: PageView.CONTACT },
@@ -30,34 +30,33 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <button 
+            <button
               onClick={() => handleNavClick(PageView.HOME)}
               className="flex-shrink-0 flex items-center gap-2 cursor-pointer"
             >
-               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-blue-400 flex items-center justify-center text-white font-serif font-bold text-xl">
-                  D
-               </div>
-               <span className="font-serif text-xl font-semibold text-slate-800 tracking-wide">
-                 Crossing Over <span className="text-brand-600 font-normal text-base">with Dez</span>
-               </span>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-blue-400 flex items-center justify-center text-white font-serif font-bold text-xl">
+                D
+              </div>
+              <span className="font-serif text-xl font-semibold text-slate-800 tracking-wide">
+                Crossing Over <span className="text-brand-600 font-normal text-base">with Dez</span>
+              </span>
             </button>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <button
                 key={link.value}
                 onClick={() => handleNavClick(link.value)}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
-                  currentView === link.value
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${currentView === link.value
                     ? 'text-brand-700 bg-brand-50'
                     : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'
-                }`}
+                  }`}
               >
                 {link.label}
               </button>
             ))}
-            
+
             <div className="h-6 w-px bg-slate-200 mx-2"></div>
 
             <button
@@ -113,16 +112,15 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
               <button
                 key={link.value}
                 onClick={() => handleNavClick(link.value)}
-                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${
-                  currentView === link.value
+                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${currentView === link.value
                     ? 'text-brand-700 bg-brand-50'
                     : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'
-                }`}
+                  }`}
               >
                 {link.label}
               </button>
             ))}
-             <button className="w-full mt-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-md text-base font-medium transition-all">
+            <button className="w-full mt-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-md text-base font-medium transition-all">
               Book Now
             </button>
           </div>
