@@ -124,7 +124,7 @@ const App: React.FC = () => {
 
       case PageView.COMPANION:
         return (
-          <div className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto ethereal-gradient min-h-screen">
+          <div className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen bg-[url('/heavenly-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed">
             <div className="text-center mb-10">
               <h1 className="text-3xl font-serif font-bold text-slate-900 sm:text-4xl">Crossing Over Live</h1>
               <p className="mt-3 max-w-2xl mx-auto text-xl text-slate-500 sm:mt-4">
