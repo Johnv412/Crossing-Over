@@ -57,6 +57,126 @@
 
 <body>
   <div id="root"></div>
+  <style>
+    /* Scoped styles for Live Concierge Widget */
+    #lc-fab-root {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+      font-family: sans-serif;
+    }
+
+    #lc-fab-root .lc-fab-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #8b5cf6;
+      /* brand-500/600ish purple */
+      color: white;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    #lc-fab-root .lc-fab-button:hover {
+      background-color: #7c3aed;
+      transform: scale(1.05);
+    }
+
+    #lc-fab-root .lc-fab-modal {
+      position: fixed;
+      bottom: 92px;
+      /* 60px button + 20px bottom + 12px gap */
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      display: none;
+      /* Hidden by default */
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      z-index: 10000;
+    }
+
+    #lc-fab-root .lc-fab-modal.open {
+      display: flex;
+    }
+
+    #lc-fab-root iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+
+  <div id="lc-fab-root">
+    <div id="lc-fab-modal" class="lc-fab-modal">
+      <iframe src="https://multi-tenant-motor.web.app/embed?tenantId=efj6yWE67K0YSt2VXQ5a" allow="microphone"
+        title="Live Concierge"></iframe>
+    </div>
+    <button id="lc-fab-button" class="lc-fab-button" aria-label="Open Live Concierge">
+      <!-- Microphone Icon SVG -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+        <line x1="12" y1="19" x2="12" y2="23"></line>
+        <line x1="8" y1="23" x2="16" y2="23"></line>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+      (function () {
+        const root = document.getElementById('lc-fab-root');
+        const button = document.getElementById('lc-fab-button');
+        const modal = document.getElementById('lc-fab-modal');
+
+        let isOpen = false;
+
+        function toggleModal(e) {
+          e.stopPropagation();
+          isOpen = !isOpen;
+          if (isOpen) {
+            modal.classList.add('open');
+          } else {
+            modal.classList.remove('open');
+          }
+        }
+
+        function closeModal() {
+          if (isOpen) {
+            isOpen = false;
+            modal.classList.remove('open');
+          }
+        }
+
+        // Handle clicks
+        button.addEventListener('click', toggleModal);
+
+        // Close on click outside
+        document.addEventListener('click', function (event) {
+          if (isOpen && !root.contains(event.target)) {
+            closeModal();
+          }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape' && isOpen) {
+            closeModal();
+          }
+        });
+      })();
+  </script>
 </body>
 
 </html>
