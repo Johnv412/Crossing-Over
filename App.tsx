@@ -9,6 +9,7 @@ import ServiceCard from './components/ServiceCard';
 import BlogPostDetail from './components/BlogPostDetail';
 import SettingsModal from './components/SettingsModal';
 import Reviews from './components/Reviews';
+import FloatingDez from './components/FloatingDez';
 
 const DEFAULT_HERO_IMAGE = "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=1600";
 
@@ -425,6 +426,8 @@ const App: React.FC = () => {
         geminiApiKey={geminiApiKey}
         setGeminiApiKey={setGeminiApiKey}
       />
+
+      <FloatingDez />
 
       <footer className="bg-white/90 backdrop-blur-sm border-t border-slate-200 mt-auto">
         <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
