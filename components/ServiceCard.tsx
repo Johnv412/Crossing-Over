@@ -14,7 +14,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
         <h3 className="text-2xl font-serif font-semibold text-slate-800 mb-2">{service.title}</h3>
         {service.price && <p className="text-brand-600 font-medium text-lg mb-4">{service.price}</p>}
         <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
-        
+
         <ul className="space-y-3 mb-8">
           {service.features.map((feature, idx) => (
             <li key={idx} className="flex items-start">
@@ -27,13 +27,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
         </ul>
       </div>
       <div className="p-6 bg-slate-50 border-t border-slate-100">
-        <button 
+        <button
+          onClick={() => {
+            if (!isComingSoon) {
+              window.location.hash = 'contact';
+              window.scrollTo(0, 0);
+            }
+          }}
           disabled={isComingSoon}
-          className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${
-            isComingSoon 
-            ? 'bg-slate-200 text-slate-500 cursor-not-allowed' 
-            : 'bg-slate-800 text-white hover:bg-slate-700'
-          }`}
+          className={`w-full py-3 px-4 rounded-lg font-medium transition-colors ${isComingSoon
+              ? 'bg-slate-200 text-slate-500 cursor-not-allowed'
+              : 'bg-slate-800 text-white hover:bg-slate-700'
+            }`}
         >
           {service.cta}
         </button>
