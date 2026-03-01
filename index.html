@@ -97,6 +97,7 @@
       right: 20px;
       width: 350px;
       height: 500px;
+      max-height: calc(100vh - 120px);
       background: white;
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
@@ -106,6 +107,18 @@
       overflow: hidden;
       border: 1px solid #e2e8f0;
       z-index: 10000;
+    }
+
+    @media (max-width: 480px) {
+      #lc-fab-root .lc-fab-modal {
+        width: calc(100vw - 40px);
+        height: 600px;
+        /* Taller on mobile to avoid squishing form fields */
+        max-height: calc(100vh - 110px);
+        bottom: 90px;
+        right: 20px;
+        left: 20px;
+      }
     }
 
     #lc-fab-root .lc-fab-modal.open {
