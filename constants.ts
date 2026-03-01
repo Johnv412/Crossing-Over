@@ -6,8 +6,8 @@ export const SERVICES: Service[] = [
     id: 'private-reading',
     title: 'Private Mediumship Reading',
     description: 'A deeply personal 1:1 session with Dez to connect with your departed loved ones, receive messages of validation, and find closure.',
-    price: '$250 / session',
-    features: ['60-minute Zoom session', 'Recording included', 'Pre-session energy clearing', 'Follow-up integration email'],
+    price: '',
+    features: ['60-minute in-person session', 'Pre-session energy clearing', 'Follow-up integration email'],
     cta: 'Book Your Session'
   },
   {
