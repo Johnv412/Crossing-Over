@@ -9,9 +9,12 @@ interface SettingsModalProps {
   blogPosts: BlogPost[];
   updateBlogPostImage: (id: string, url: string) => void;
   testimonials: Testimonial[];
+  pendingReviews: Testimonial[];
   updateTestimonialAvatar: (id: string, url: string) => void;
   onAddTestimonial: (t: Omit<Testimonial, 'id'>) => void;
   onDeleteTestimonial: (id: string) => void;
+  onApproveTestimonial: (id: string) => void;
+  onRejectTestimonial: (id: string) => void;
   onReset: () => void;
   geminiApiKey: string;
   setGeminiApiKey: (key: string) => void;
@@ -25,9 +28,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   blogPosts,
   updateBlogPostImage,
   testimonials,
+  pendingReviews,
   updateTestimonialAvatar,
   onAddTestimonial,
   onDeleteTestimonial,
+  onApproveTestimonial,
+  onRejectTestimonial,
   onReset,
   geminiApiKey,
   setGeminiApiKey
@@ -205,6 +211,41 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                     </button>
                   </div>
                 </section>
+
+                {/* Pending Reviews Section */}
+                {pendingReviews.length > 0 && (
+                  <section className="p-4 bg-orange-50 border border-orange-200 rounded-xl shadow-sm">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="p-1 px-2 uppercase tracking-wide text-[10px] font-bold bg-orange-200 text-orange-800 rounded-md">Action Required</div>
+                      <h4 className="text-sm font-semibold text-orange-800 uppercase tracking-wider">Pending Reviews ({pendingReviews.length})</h4>
+                    </div>
+                    <div className="space-y-4">
+                      {pendingReviews.map((t) => (
+                        <div key={t.id} className="p-3 bg-white rounded-lg border border-orange-100 shadow-sm relative">
+                          <p className="text-xs text-slate-800 italic mb-2">"{t.text}"</p>
+                          <div className="flex items-center text-[11px] text-slate-500 mb-3">
+                            <span className="font-bold text-slate-700 mr-1">{t.name}</span>
+                            {t.location && <span> • {t.location}</span>}
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => onApproveTestimonial(t.id)}
+                              className="flex-1 py-1.5 bg-green-100 text-green-700 hover:bg-green-200 rounded text-xs font-bold transition-colors"
+                            >
+                              Approve & Publish
+                            </button>
+                            <button
+                              onClick={() => onRejectTestimonial(t.id)}
+                              className="flex-1 py-1.5 bg-red-50 text-red-600 hover:bg-red-100 rounded text-xs font-bold transition-colors"
+                            >
+                              Reject & Delete
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 {/* Manage Reviews Section */}
                 <section className="p-4 bg-white border border-slate-100 rounded-xl shadow-sm">

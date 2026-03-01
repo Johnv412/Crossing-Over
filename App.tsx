@@ -22,6 +22,7 @@ const App: React.FC = () => {
   const [heroImageUrl, setHeroImageUrl] = useState(DEFAULT_HERO_IMAGE);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>(BLOG_POSTS);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(TESTIMONIALS);
+  const [pendingReviews, setPendingReviews] = useState<Testimonial[]>([]);
   const [geminiApiKey, setGeminiApiKey] = useState(localStorage.getItem('dez_gemini_api_key') || '');
 
   // Contact form state
@@ -39,6 +40,9 @@ const App: React.FC = () => {
 
     const savedTestimonials = localStorage.getItem('dez_testimonials');
     if (savedTestimonials) setTestimonials(JSON.parse(savedTestimonials));
+
+    const savedPendingReviews = localStorage.getItem('dez_pending_reviews');
+    if (savedPendingReviews) setPendingReviews(JSON.parse(savedPendingReviews));
 
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1).toUpperCase();
@@ -69,6 +73,10 @@ const App: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('dez_testimonials', JSON.stringify(testimonials));
   }, [testimonials]);
+
+  useEffect(() => {
+    localStorage.setItem('dez_pending_reviews', JSON.stringify(pendingReviews));
+  }, [pendingReviews]);
 
   useEffect(() => {
     localStorage.setItem('dez_gemini_api_key', geminiApiKey);
@@ -104,6 +112,28 @@ const App: React.FC = () => {
     setTestimonials(prev => [newT, ...prev]);
   };
 
+  const addPendingTestimonial = (review: Omit<Testimonial, 'id'>) => {
+    const newT: Testimonial = {
+      ...review,
+      id: Date.now().toString()
+    };
+    setPendingReviews(prev => [newT, ...prev]);
+  };
+
+  const approveTestimonial = (id: string) => {
+    const review = pendingReviews.find(r => r.id === id);
+    if (review) {
+      setTestimonials(prev => [review, ...prev]);
+      setPendingReviews(prev => prev.filter(r => r.id !== id));
+    }
+  };
+
+  const rejectTestimonial = (id: string) => {
+    if (window.confirm("Are you sure you want to reject and delete this pending review?")) {
+      setPendingReviews(prev => prev.filter(r => r.id !== id));
+    }
+  };
+
   const deleteTestimonial = (id: string) => {
     if (window.confirm("Are you sure you want to delete this review?")) {
       setTestimonials(prev => prev.filter(t => t.id !== id));
@@ -115,10 +145,12 @@ const App: React.FC = () => {
       setHeroImageUrl(DEFAULT_HERO_IMAGE);
       setBlogPosts(BLOG_POSTS);
       setTestimonials(TESTIMONIALS);
+      setPendingReviews([]);
       setGeminiApiKey('');
       localStorage.removeItem('dez_hero_image');
       localStorage.removeItem('dez_blog_posts');
       localStorage.removeItem('dez_testimonials');
+      localStorage.removeItem('dez_pending_reviews');
       localStorage.removeItem('dez_gemini_api_key');
     }
   };
@@ -161,7 +193,7 @@ const App: React.FC = () => {
   const renderContent = () => {
     switch (currentView) {
       case PageView.REVIEWS:
-        return <Reviews testimonials={testimonials} onAddReview={addTestimonial} />;
+        return <Reviews testimonials={testimonials} onAddReview={addPendingTestimonial} />;
 
       case PageView.COMPANION:
         return (
@@ -419,9 +451,12 @@ const App: React.FC = () => {
         blogPosts={blogPosts}
         updateBlogPostImage={updateBlogPostImage}
         testimonials={testimonials}
+        pendingReviews={pendingReviews}
         updateTestimonialAvatar={updateTestimonialAvatar}
         onAddTestimonial={addTestimonial}
         onDeleteTestimonial={deleteTestimonial}
+        onApproveTestimonial={approveTestimonial}
+        onRejectTestimonial={rejectTestimonial}
         onReset={handleResetSettings}
         geminiApiKey={geminiApiKey}
         setGeminiApiKey={setGeminiApiKey}

@@ -16,9 +16,29 @@ const Reviews: React.FC<ReviewsProps> = ({ testimonials, onAddReview }) => {
     avatar: `https://picsum.photos/100/100?random=${Math.floor(Math.random() * 1000)}`
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.text) return;
+
+    // Send email notification about pending review
+    try {
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'd1e34c5d-5e49-4b5c-93fe-9ef0b76f7840',
+          subject: 'New Pending Review - Crossing Over',
+          from_name: 'Crossing Over Website',
+          message: `A new review has been submitted and is pending approval.\n\nName: ${formData.name}\nLocation: ${formData.location || 'N/A'}\nReview: ${formData.text}\n\nPlease log into the staging/live site settings to approve or reject this review.`
+        })
+      });
+    } catch (err) {
+      console.error("Failed to send review notification", err);
+    }
+
     onAddReview(formData);
     setFormData({
       name: '',
@@ -27,7 +47,7 @@ const Reviews: React.FC<ReviewsProps> = ({ testimonials, onAddReview }) => {
       avatar: `https://picsum.photos/100/100?random=${Math.floor(Math.random() * 1000)}`
     });
     setShowForm(false);
-    alert("Thank you for sharing your story! It has been added to our community wall.");
+    alert("Thank you for sharing your story! It has been submitted for review and will appear on the wall soon.");
   };
 
   return (
