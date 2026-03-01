@@ -9,9 +9,9 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onCtaClick, imageUrl }) => {
   return (
-    <div className="relative overflow-hidden bg-white">
+    <div className="relative overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <div className="relative z-10 pb-8 bg-white/30 backdrop-blur-md sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
           <svg
             className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
             fill="currentColor"
@@ -59,7 +59,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick, imageUrl }) => {
       <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img
           className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full opacity-90 transition-opacity duration-700"
-          src={imageUrl} 
+          src={imageUrl}
           alt="Ethereal landscape with peaceful light"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent lg:via-white/20"></div>

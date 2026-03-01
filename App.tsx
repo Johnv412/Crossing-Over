@@ -220,7 +220,7 @@ const App: React.FC = () => {
 
       case PageView.SERVICES:
         return (
-          <div className="py-16 bg-white/90 backdrop-blur-sm">
+          <div className="py-16 bg-white/30 backdrop-blur-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
                 <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Offerings</h2>
@@ -245,7 +245,7 @@ const App: React.FC = () => {
 
       case PageView.CONTACT:
         return (
-          <div className="bg-white/90 backdrop-blur-sm py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
+          <div className="bg-white/30 backdrop-blur-md py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
             <div className="relative max-w-xl mx-auto">
               <div className="text-center">
                 <h2 className="text-3xl font-serif font-extrabold tracking-tight text-slate-900 sm:text-4xl">Get in touch</h2>
@@ -326,7 +326,7 @@ const App: React.FC = () => {
             <Hero onCtaClick={() => navigateTo(PageView.SERVICES)} imageUrl={heroImageUrl} />
 
             {/* Value Props Section */}
-            <div className="py-12 bg-white/90 backdrop-blur-sm">
+            <div className="py-12 bg-white/30 backdrop-blur-md">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="lg:text-center">
                   <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Why Choose Dez</h2>
@@ -341,7 +341,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Testimonials Preview */}
-            <div className="bg-brand-50/90 backdrop-blur-sm py-16">
+            <div className="bg-brand-50/40 backdrop-blur-md py-16">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-end mb-12">
                   <h2 className="text-3xl font-serif font-bold text-slate-900">Healing Stories</h2>
@@ -421,7 +421,7 @@ const App: React.FC = () => {
 
       <FloatingDez />
 
-      <footer className="bg-white/90 backdrop-blur-sm border-t border-slate-200 mt-auto">
+      <footer className="bg-white/30 backdrop-blur-md border-t border-slate-200 mt-auto">
         <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
           <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
             <div className="px-5 py-2">

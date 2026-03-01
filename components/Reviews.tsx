@@ -51,7 +51,7 @@ const Reviews: React.FC<ReviewsProps> = ({ testimonials, onAddReview }) => {
   };
 
   return (
-    <div className="py-16 bg-white min-h-screen">
+    <div className="py-16 bg-white/30 backdrop-blur-md min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Community Wall</h2>
