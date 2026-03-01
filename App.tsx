@@ -30,7 +30,7 @@ const App: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  // Load state from localStorage on mount
+  // Load state from localStorage / JSONBin on mount
   useEffect(() => {
     const savedHero = localStorage.getItem('dez_hero_image');
     if (savedHero) setHeroImageUrl(savedHero);
@@ -38,11 +38,26 @@ const App: React.FC = () => {
     const savedBlogPosts = localStorage.getItem('dez_blog_posts');
     if (savedBlogPosts) setBlogPosts(JSON.parse(savedBlogPosts));
 
-    const savedTestimonials = localStorage.getItem('dez_testimonials');
-    if (savedTestimonials) setTestimonials(JSON.parse(savedTestimonials));
-
-    const savedPendingReviews = localStorage.getItem('dez_pending_reviews');
-    if (savedPendingReviews) setPendingReviews(JSON.parse(savedPendingReviews));
+    // Fetch live and pending reviews from JSONBin
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch('https://api.jsonbin.io/v3/b/69a39e88d0ea881f40e36f89', {
+          headers: {
+            'X-Master-Key': import.meta.env.VITE_JSONBIN_API_KEY || ''
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          if (data.record) {
+            setTestimonials(data.record.testimonials || TESTIMONIALS);
+            setPendingReviews(data.record.pendingReviews || []);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch reviews from JSONBin", err);
+      }
+    };
+    fetchReviews();
 
     const handleHashChange = () => {
       const hash = window.location.hash.slice(1).toUpperCase();
@@ -70,13 +85,24 @@ const App: React.FC = () => {
     localStorage.setItem('dez_blog_posts', JSON.stringify(blogPosts));
   }, [blogPosts]);
 
-  useEffect(() => {
-    localStorage.setItem('dez_testimonials', JSON.stringify(testimonials));
-  }, [testimonials]);
-
-  useEffect(() => {
-    localStorage.setItem('dez_pending_reviews', JSON.stringify(pendingReviews));
-  }, [pendingReviews]);
+  // Sync to JSONBin whenever reviews change
+  const syncToJSONBin = async (newTestimonials: Testimonial[], newPending: Testimonial[]) => {
+    try {
+      await fetch('https://api.jsonbin.io/v3/b/69a39e88d0ea881f40e36f89', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': import.meta.env.VITE_JSONBIN_API_KEY || ''
+        },
+        body: JSON.stringify({
+          testimonials: newTestimonials,
+          pendingReviews: newPending
+        })
+      });
+    } catch (err) {
+      console.error("Failed to sync reviews to JSONBin", err);
+    }
+  };
 
   useEffect(() => {
     localStorage.setItem('dez_gemini_api_key', geminiApiKey);
@@ -101,42 +127,49 @@ const App: React.FC = () => {
   };
 
   const updateTestimonialAvatar = (id: string, url: string) => {
-    setTestimonials(prev => prev.map(t => t.id === id ? { ...t, avatar: url } : t));
+    const updated = testimonials.map(t => t.id === id ? { ...t, avatar: url } : t);
+    setTestimonials(updated);
+    syncToJSONBin(updated, pendingReviews);
   };
 
   const addTestimonial = (review: Omit<Testimonial, 'id'>) => {
-    const newT: Testimonial = {
-      ...review,
-      id: Date.now().toString()
-    };
-    setTestimonials(prev => [newT, ...prev]);
+    const newT: Testimonial = { ...review, id: Date.now().toString() };
+    const updated = [newT, ...testimonials];
+    setTestimonials(updated);
+    syncToJSONBin(updated, pendingReviews);
   };
 
   const addPendingTestimonial = (review: Omit<Testimonial, 'id'>) => {
-    const newT: Testimonial = {
-      ...review,
-      id: Date.now().toString()
-    };
-    setPendingReviews(prev => [newT, ...prev]);
+    const newT: Testimonial = { ...review, id: Date.now().toString() };
+    const updatedPending = [newT, ...pendingReviews];
+    setPendingReviews(updatedPending);
+    syncToJSONBin(testimonials, updatedPending);
   };
 
   const approveTestimonial = (id: string) => {
     const review = pendingReviews.find(r => r.id === id);
     if (review) {
-      setTestimonials(prev => [review, ...prev]);
-      setPendingReviews(prev => prev.filter(r => r.id !== id));
+      const updatedT = [review, ...testimonials];
+      const updatedP = pendingReviews.filter(r => r.id !== id);
+      setTestimonials(updatedT);
+      setPendingReviews(updatedP);
+      syncToJSONBin(updatedT, updatedP);
     }
   };
 
   const rejectTestimonial = (id: string) => {
     if (window.confirm("Are you sure you want to reject and delete this pending review?")) {
-      setPendingReviews(prev => prev.filter(r => r.id !== id));
+      const updatedP = pendingReviews.filter(r => r.id !== id);
+      setPendingReviews(updatedP);
+      syncToJSONBin(testimonials, updatedP);
     }
   };
 
   const deleteTestimonial = (id: string) => {
     if (window.confirm("Are you sure you want to delete this review?")) {
-      setTestimonials(prev => prev.filter(t => t.id !== id));
+      const updatedT = testimonials.filter(t => t.id !== id);
+      setTestimonials(updatedT);
+      syncToJSONBin(updatedT, pendingReviews);
     }
   };
 
@@ -149,9 +182,8 @@ const App: React.FC = () => {
       setGeminiApiKey('');
       localStorage.removeItem('dez_hero_image');
       localStorage.removeItem('dez_blog_posts');
-      localStorage.removeItem('dez_testimonials');
-      localStorage.removeItem('dez_pending_reviews');
       localStorage.removeItem('dez_gemini_api_key');
+      syncToJSONBin(TESTIMONIALS, []);
     }
   };
 
