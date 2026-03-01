@@ -16,15 +16,7 @@ export interface Testimonial {
   avatar: string;
 }
 
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  date: string;
-  imageUrl: string;
-  category: string;
-}
+
 
 export interface ChatMessage {
   id: string;
@@ -37,8 +29,7 @@ export enum PageView {
   HOME = 'HOME',
   SERVICES = 'SERVICES',
   COMPANION = 'COMPANION',
-  BLOG = 'BLOG',
-  BLOG_POST = 'BLOG_POST',
+  ABOUT = 'ABOUT',
   REVIEWS = 'REVIEWS',
   CONTACT = 'CONTACT'
 }

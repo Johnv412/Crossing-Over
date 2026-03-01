@@ -1,12 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { PageView, BlogPost, Testimonial } from './types';
-import { SERVICES, BLOG_POSTS, TESTIMONIALS } from './constants';
+import { PageView, Testimonial } from './types';
+import { SERVICES, TESTIMONIALS } from './constants';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import GriefCompanion from './components/GriefCompanion';
 import ServiceCard from './components/ServiceCard';
-import BlogPostDetail from './components/BlogPostDetail';
+import AboutMe from './components/AboutMe';
 import SettingsModal from './components/SettingsModal';
 import Reviews from './components/Reviews';
 import FloatingDez from './components/FloatingDez';
@@ -15,12 +15,9 @@ const DEFAULT_HERO_IMAGE = "https://images.unsplash.com/photo-1518005020951-eccb
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<PageView>(PageView.HOME);
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
-  // Managed content state for settings
   const [heroImageUrl, setHeroImageUrl] = useState(DEFAULT_HERO_IMAGE);
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(BLOG_POSTS);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [pendingReviews, setPendingReviews] = useState<Testimonial[]>([]);
   const [geminiApiKey, setGeminiApiKey] = useState(localStorage.getItem('dez_gemini_api_key') || '');
@@ -34,9 +31,6 @@ const App: React.FC = () => {
   useEffect(() => {
     const savedHero = localStorage.getItem('dez_hero_image');
     if (savedHero) setHeroImageUrl(savedHero);
-
-    const savedBlogPosts = localStorage.getItem('dez_blog_posts');
-    if (savedBlogPosts) setBlogPosts(JSON.parse(savedBlogPosts));
 
     // Fetch live and pending reviews from JSONBin
     const fetchReviews = async () => {
@@ -67,10 +61,8 @@ const App: React.FC = () => {
       const hash = window.location.hash.slice(1).toUpperCase();
       if (hash && hash in PageView) {
         setCurrentView(PageView[hash as keyof typeof PageView]);
-        if (hash !== 'BLOG_POST') setSelectedPost(null);
       } else {
         setCurrentView(PageView.HOME);
-        setSelectedPost(null);
       }
     };
 
@@ -84,10 +76,6 @@ const App: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('dez_hero_image', heroImageUrl);
   }, [heroImageUrl]);
-
-  useEffect(() => {
-    localStorage.setItem('dez_blog_posts', JSON.stringify(blogPosts));
-  }, [blogPosts]);
 
   // Sync to JSONBin whenever reviews change
   const syncToJSONBin = async (newTestimonials: Testimonial[], newPending: Testimonial[]) => {
@@ -121,18 +109,6 @@ const App: React.FC = () => {
     window.location.hash = view.toLowerCase();
     setCurrentView(view);
     window.scrollTo(0, 0);
-  };
-
-  const handlePostClick = (post: BlogPost) => {
-    setSelectedPost(post);
-    navigateTo(PageView.BLOG_POST);
-  };
-
-  const updateBlogPostImage = (id: string, url: string) => {
-    setBlogPosts(prev => prev.map(post => post.id === id ? { ...post, imageUrl: url } : post));
-    if (selectedPost?.id === id) {
-      setSelectedPost(prev => prev ? { ...prev, imageUrl: url } : null);
-    }
   };
 
   const updateTestimonialAvatar = (id: string, url: string) => {
@@ -185,12 +161,10 @@ const App: React.FC = () => {
   const handleResetSettings = () => {
     if (window.confirm("Are you sure you want to reset all images and content to defaults?")) {
       setHeroImageUrl(DEFAULT_HERO_IMAGE);
-      setBlogPosts(BLOG_POSTS);
       setTestimonials(TESTIMONIALS);
       setPendingReviews([]);
       setGeminiApiKey('');
       localStorage.removeItem('dez_hero_image');
-      localStorage.removeItem('dez_blog_posts');
       localStorage.removeItem('dez_gemini_api_key');
       syncToJSONBin(TESTIMONIALS, []);
     }
@@ -271,57 +245,8 @@ const App: React.FC = () => {
           </div>
         );
 
-      case PageView.BLOG:
-        return (
-          <div className="py-16 bg-white/90 backdrop-blur-sm">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="text-center mb-12">
-                <h1 className="text-3xl font-serif font-bold text-slate-900">Soul Whispers Blog</h1>
-                <p className="mt-4 text-xl text-slate-500">Insights, channelings, and guidance from Dez.</p>
-              </div>
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {blogPosts.map(post => (
-                  <div key={post.id} className="flex flex-col rounded-lg shadow-lg overflow-hidden group">
-                    <div className="flex-shrink-0 relative overflow-hidden bg-slate-100">
-                      <img className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110" src={post.imageUrl} alt={post.title} />
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <button
-                          onClick={() => handlePostClick(post)}
-                          className="bg-white text-slate-900 px-4 py-2 rounded-full font-medium shadow-lg"
-                        >
-                          Read Article
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex-1 bg-white p-6 flex flex-col justify-between">
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-brand-600">
-                          {post.category}
-                        </p>
-                        <button onClick={() => handlePostClick(post)} className="block mt-2 text-left">
-                          <p className="text-xl font-semibold text-slate-900 hover:text-brand-600 transition-colors">{post.title}</p>
-                          <p className="mt-3 text-base text-slate-500 line-clamp-3">{post.excerpt}</p>
-                        </button>
-                      </div>
-                      <div className="mt-6 flex items-center">
-                        <div className="text-sm text-slate-500">
-                          <time dateTime={post.date}>{post.date}</time>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      case PageView.BLOG_POST:
-        if (!selectedPost) {
-          navigateTo(PageView.BLOG);
-          return null;
-        }
-        return <BlogPostDetail post={selectedPost} onBack={() => navigateTo(PageView.BLOG)} />;
+      case PageView.ABOUT:
+        return <AboutMe />;
 
       case PageView.CONTACT:
         return (
@@ -489,8 +414,6 @@ const App: React.FC = () => {
         onClose={() => setIsSettingsOpen(false)}
         heroImageUrl={heroImageUrl}
         setHeroImageUrl={setHeroImageUrl}
-        blogPosts={blogPosts}
-        updateBlogPostImage={updateBlogPostImage}
         testimonials={testimonials}
         pendingReviews={pendingReviews}
         updateTestimonialAvatar={updateTestimonialAvatar}
@@ -519,8 +442,8 @@ const App: React.FC = () => {
               </button>
             </div>
             <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.BLOG)} className="text-base text-slate-500 hover:text-slate-900">
-                Blog
+              <button onClick={() => navigateTo(PageView.ABOUT)} className="text-base text-slate-500 hover:text-slate-900">
+                About
               </button>
             </div>
             <div className="px-5 py-2">

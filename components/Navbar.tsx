@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
     { label: 'Services', value: PageView.SERVICES },
     { label: 'Crossing Over Live', value: PageView.COMPANION },
     { label: 'Reviews', value: PageView.REVIEWS },
-    { label: 'Blog', value: PageView.BLOG },
+    { label: 'About', value: PageView.ABOUT },
     { label: 'Contact', value: PageView.CONTACT },
   ];
 
@@ -49,8 +49,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
                 key={link.value}
                 onClick={() => handleNavClick(link.value)}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${currentView === link.value
-                    ? 'text-brand-700 bg-brand-50'
-                    : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'
+                  ? 'text-brand-700 bg-brand-50'
+                  : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'
                   }`}
               >
                 {link.label}
@@ -113,8 +113,8 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
                 key={link.value}
                 onClick={() => handleNavClick(link.value)}
                 className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${currentView === link.value
-                    ? 'text-brand-700 bg-brand-50'
-                    : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'
+                  ? 'text-brand-700 bg-brand-50'
+                  : 'text-slate-600 hover:text-brand-600 hover:bg-slate-50'
                   }`}
               >
                 {link.label}

@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { BlogPost, Testimonial } from '../types';
+import { Testimonial } from '../types';
 
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   heroImageUrl: string;
   setHeroImageUrl: (url: string) => void;
-  blogPosts: BlogPost[];
-  updateBlogPostImage: (id: string, url: string) => void;
   testimonials: Testimonial[];
   pendingReviews: Testimonial[];
   updateTestimonialAvatar: (id: string, url: string) => void;
@@ -25,8 +23,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose,
   heroImageUrl,
   setHeroImageUrl,
-  blogPosts,
-  updateBlogPostImage,
   testimonials,
   pendingReviews,
   updateTestimonialAvatar,
@@ -280,27 +276,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   </div>
                 </section>
 
-                {/* Blog Posts Section */}
-                <section className="p-4 bg-slate-50 rounded-xl border border-slate-100">
-                  <h4 className="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Blog Post Images</h4>
-                  <div className="space-y-4">
-                    {blogPosts.map((post) => (
-                      <div key={post.id} className="flex gap-4 items-center">
-                        <img src={post.imageUrl} className="w-16 h-12 rounded-md object-cover bg-white shadow-sm" alt={post.title} />
-                        <div className="flex-1">
-                          <label className="text-xs text-slate-500 mb-1 block truncate">{post.title}</label>
-                          <input
-                            type="text"
-                            value={post.imageUrl}
-                            onChange={(e) => updateBlogPostImage(post.id, e.target.value)}
-                            placeholder="Image URL..."
-                            className="w-full px-3 py-2 text-sm border border-slate-200 rounded-md focus:ring-brand-500 focus:border-brand-500"
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </section>
+
               </div>
             )}
           </div>
