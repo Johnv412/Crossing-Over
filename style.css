@@ -35,3 +35,15 @@ body {
     position: relative;
     z-index: 10;
 }
+
+/* === Match Companion Page: remove frosted glass overlays === */
+/* These override the Tailwind bg-white/30 and backdrop-blur-md classes */
+/* applied to page wrappers so all pages show the raw cloud background   */
+.bg-white\/30 {
+    background-color: transparent !important;
+}
+
+.backdrop-blur-md {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
