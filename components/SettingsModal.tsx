@@ -14,8 +14,6 @@ interface SettingsModalProps {
   onApproveTestimonial: (id: string) => void;
   onRejectTestimonial: (id: string) => void;
   onReset: () => void;
-  geminiApiKey: string;
-  setGeminiApiKey: (key: string) => void;
 }
 
 const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -30,9 +28,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   onDeleteTestimonial,
   onApproveTestimonial,
   onRejectTestimonial,
-  onReset,
-  geminiApiKey,
-  setGeminiApiKey
+  onReset
 }) => {
   const [newReview, setNewReview] = useState({ name: '', location: '', text: '', avatar: '' });
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -114,42 +110,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
               </div>
             ) : (
               <div className="space-y-8 max-h-[65vh] overflow-y-auto pr-2 custom-scrollbar">
-                {/* Gemini API Key Section */}
-                <section className="bg-brand-50 p-5 rounded-xl border border-brand-200">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="p-1.5 bg-brand-600 rounded-lg text-white">
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                      </svg>
-                    </div>
-                    <h4 className="text-sm font-bold text-brand-800 uppercase tracking-wider">Gemini API Configuration</h4>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="relative">
-                      <input
-                        type="password"
-                        value={geminiApiKey}
-                        onChange={(e) => setGeminiApiKey(e.target.value)}
-                        placeholder="Paste your Gemini API Key here..."
-                        className="w-full px-4 py-3 text-sm border border-brand-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white"
-                      />
-                    </div>
-                    <div className="p-3 bg-white/50 rounded-lg border border-brand-100">
-                      <p className="text-[11px] font-bold text-brand-700 uppercase mb-2 tracking-tighter flex items-center gap-1">
-                        <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Model Intelligence Information
-                      </p>
-                      <ul className="text-[10px] text-brand-600 space-y-1">
-                        <li>• <strong>Voice API:</strong> Uses <code className="bg-brand-100 px-1 rounded">gemini-2.5-flash-native-audio-preview-12-2025</code></li>
-                        <li>• <strong>Text API:</strong> Uses <code className="bg-brand-100 px-1 rounded">gemini-3-flash-preview</code></li>
-                        <li>• <strong>Encryption:</strong> Saved locally in your browser for secure access.</li>
-                      </ul>
-                    </div>
-                  </div>
-                </section>
-
                 {/* Hero Section */}
                 <section className="bg-slate-50 p-4 rounded-xl border border-slate-100">
                   <h4 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-3">Hero Image</h4>

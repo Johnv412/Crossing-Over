@@ -20,7 +20,6 @@ const App: React.FC = () => {
   const [heroImageUrl, setHeroImageUrl] = useState(DEFAULT_HERO_IMAGE);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [pendingReviews, setPendingReviews] = useState<Testimonial[]>([]);
-  const [geminiApiKey, setGeminiApiKey] = useState(localStorage.getItem('dez_gemini_api_key') || '');
 
   // Contact form state
   const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', message: '' });
@@ -101,9 +100,7 @@ const App: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem('dez_gemini_api_key', geminiApiKey);
-  }, [geminiApiKey]);
+
 
   const navigateTo = (view: PageView) => {
     window.location.hash = view.toLowerCase();
@@ -163,9 +160,7 @@ const App: React.FC = () => {
       setHeroImageUrl(DEFAULT_HERO_IMAGE);
       setTestimonials(TESTIMONIALS);
       setPendingReviews([]);
-      setGeminiApiKey('');
       localStorage.removeItem('dez_hero_image');
-      localStorage.removeItem('dez_gemini_api_key');
       syncToJSONBin(TESTIMONIALS, []);
     }
   };
@@ -422,8 +417,6 @@ const App: React.FC = () => {
         onApproveTestimonial={approveTestimonial}
         onRejectTestimonial={rejectTestimonial}
         onReset={handleResetSettings}
-        geminiApiKey={geminiApiKey}
-        setGeminiApiKey={setGeminiApiKey}
       />
 
       <FloatingDez />

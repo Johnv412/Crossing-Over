@@ -86,11 +86,11 @@ const GriefCompanion: React.FC = () => {
     }
 
     setIsConnecting(true);
-    // Try Environment Variable first, then localStorage (Settings Panel)
-    const apiKey = process.env.API_KEY || localStorage.getItem('dez_gemini_api_key') || (window as any).wpConfig?.apiKey;
+    // Use Environment Variable instead of Settings Panel
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
     if (!apiKey) {
-      alert("API Key is missing. Please add your Gemini API Key in the site settings (gear icon) or server environment.");
+      alert("API Key is missing. This website's Hostinger deployment needs the VITE_GEMINI_API_KEY environment variable set.");
       setIsConnecting(false);
       return;
     }
@@ -254,8 +254,8 @@ const GriefCompanion: React.FC = () => {
           onClick={startVoiceSession}
           disabled={isConnecting}
           className={`px-6 py-2 rounded-full font-bold text-sm transition-all shadow-lg ${isVoiceActive
-              ? 'bg-red-500 hover:bg-red-600 text-white'
-              : 'bg-white text-brand-700 hover:bg-brand-50'
+            ? 'bg-red-500 hover:bg-red-600 text-white'
+            : 'bg-white text-brand-700 hover:bg-brand-50'
             }`}
         >
           {isVoiceActive ? 'End Voice Mode' : isConnecting ? 'Connecting...' : 'Start Voice Mode'}

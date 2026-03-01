@@ -10,12 +10,12 @@ Philosophy: Love never dies; connection continues.
 
 export const sendMessageToGemini = async (history: string[], newMessage: string): Promise<string> => {
   try {
-    // Check Env Var first, then check localStorage
-    const apiKey = process.env.API_KEY || localStorage.getItem('dez_gemini_api_key') || (window as any).wpConfig?.apiKey;
+    // Use Environment Variable instead of user settings
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
     if (!apiKey) {
       console.error("CRITICAL: API_KEY is missing from environment and local settings.");
-      return "I apologize, but my connection to the spiritual network is currently down. Please click the gear icon in the menu to add your Gemini API Key.";
+      return "I apologize, but my connection to the spiritual network is currently down. The site's environment API Key is missing.";
     }
 
     const ai = new GoogleGenAI({ apiKey });
