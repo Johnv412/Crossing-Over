@@ -28,29 +28,7 @@ export const SERVICES: Service[] = [
   }
 ];
 
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: '1',
-    name: 'Sarah M.',
-    location: 'Austin, TX',
-    text: "I was skeptical at first, but Dez knew things no one else could possibly know. connecting with my father brought me a peace I haven't felt in years.",
-    avatar: 'https://picsum.photos/100/100?random=1'
-  },
-  {
-    id: '2',
-    name: 'James R.',
-    location: 'London, UK',
-    text: "The Soul Connection Pathway changed my life. I went from drowning in grief to feeling empowered and connected to my wife in a new way.",
-    avatar: 'https://picsum.photos/100/100?random=2'
-  },
-  {
-    id: '3',
-    name: 'Elena K.',
-    location: 'Toronto, CA',
-    text: "Dez has a gift that is truly otherworldly, yet she is so grounded and kind. Her guidance is pure light.",
-    avatar: 'https://picsum.photos/100/100?random=3'
-  }
-];
+export const TESTIMONIALS: Testimonial[] = [];
 
 export const BLOG_POSTS: BlogPost[] = [
   {
