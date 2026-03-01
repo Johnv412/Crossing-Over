@@ -21,7 +21,7 @@ const App: React.FC = () => {
   // Managed content state for settings
   const [heroImageUrl, setHeroImageUrl] = useState(DEFAULT_HERO_IMAGE);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>(BLOG_POSTS);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(TESTIMONIALS);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [pendingReviews, setPendingReviews] = useState<Testimonial[]>([]);
   const [geminiApiKey, setGeminiApiKey] = useState(localStorage.getItem('dez_gemini_api_key') || '');
 
@@ -49,12 +49,16 @@ const App: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.record) {
-            setTestimonials(data.record.testimonials || TESTIMONIALS);
+            setTestimonials(data.record.testimonials || []);
             setPendingReviews(data.record.pendingReviews || []);
           }
+        } else {
+          console.error("JSONBin GET failed with status:", response.status);
+          setTestimonials(TESTIMONIALS); // Fallback to defaults only if cloud is unreachable/unauthorized so the wall isn't permanently blank
         }
       } catch (err) {
         console.error("Failed to fetch reviews from JSONBin", err);
+        setTestimonials(TESTIMONIALS);
       }
     };
     fetchReviews();
@@ -88,7 +92,7 @@ const App: React.FC = () => {
   // Sync to JSONBin whenever reviews change
   const syncToJSONBin = async (newTestimonials: Testimonial[], newPending: Testimonial[]) => {
     try {
-      await fetch('https://api.jsonbin.io/v3/b/69a39e88d0ea881f40e36f89', {
+      const response = await fetch('https://api.jsonbin.io/v3/b/69a39e88d0ea881f40e36f89', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -99,8 +103,13 @@ const App: React.FC = () => {
           pendingReviews: newPending
         })
       });
+
+      if (!response.ok) {
+        alert("Warning: Could not save to cloud! Your Hostinger VITE_JSONBIN_API_KEY might be missing or invalid. Status: " + response.status);
+      }
     } catch (err) {
       console.error("Failed to sync reviews to JSONBin", err);
+      alert("Warning: Could not save to cloud! Check your network connection.");
     }
   };
 
