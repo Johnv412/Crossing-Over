@@ -11,7 +11,7 @@ import SettingsModal from './components/SettingsModal';
 import Reviews from './components/Reviews';
 import FloatingDez from './components/FloatingDez';
 
-const DEFAULT_HERO_IMAGE = "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&q=80&w=1600";
+const DEFAULT_HERO_IMAGE = "/hero-clouds.png";
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<PageView>(PageView.HOME);
