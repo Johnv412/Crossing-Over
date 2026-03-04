@@ -333,7 +333,7 @@ const App: React.FC = () => {
                   <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl font-serif">
                     A Modern Approach to Ancient Wisdom
                   </p>
-                  <p className="mt-4 max-w-2xl text-xl text-slate-500 lg:mx-auto">
+                  <p className="mt-4 max-w-2xl text-xl font-bold text-slate-900 lg:mx-auto">
                     We blend authentic mediumship with practical grief tools and community support.
                   </p>
                 </div>
