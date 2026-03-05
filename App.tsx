@@ -249,7 +249,7 @@ const App: React.FC = () => {
             <div className="relative max-w-xl mx-auto">
               <div className="text-center">
                 <h2 className="text-3xl font-serif font-extrabold tracking-tight text-slate-900 sm:text-4xl">Get in touch</h2>
-                <p className="mt-4 text-lg leading-6 text-slate-500">
+                <p className="mt-4 text-lg leading-6 font-bold text-slate-900">
                   Questions about a reading? Want to share your story? We'd love to hear from you.
                 </p>
               </div>

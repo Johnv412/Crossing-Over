@@ -58,7 +58,7 @@ const Reviews: React.FC<ReviewsProps> = ({ testimonials, onAddReview }) => {
           <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-slate-900 sm:text-4xl">
             Healing & Connection Stories
           </p>
-          <p className="mt-4 max-w-2xl text-xl text-slate-500 lg:mx-auto">
+          <p className="mt-4 max-w-2xl text-xl font-bold text-slate-900 lg:mx-auto">
             Real experiences from people who have found comfort and closure through our sanctuary.
           </p>
           <div className="mt-8">
