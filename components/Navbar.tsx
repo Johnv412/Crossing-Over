@@ -70,7 +70,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
               </svg>
             </button>
 
-            <button className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg">
+            <button
+              onClick={() => handleNavClick(PageView.CONTACT)}
+              className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-md hover:shadow-lg"
+            >
               Book Now
             </button>
           </div>
@@ -120,7 +123,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
                 {link.label}
               </button>
             ))}
-            <button className="w-full mt-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-md text-base font-medium transition-all">
+            <button
+              onClick={() => handleNavClick(PageView.CONTACT)}
+              className="w-full mt-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-3 rounded-md text-base font-medium transition-all"
+            >
               Book Now
             </button>
           </div>
