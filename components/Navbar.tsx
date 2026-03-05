@@ -37,13 +37,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-brand-400 to-blue-400 flex items-center justify-center text-white font-serif font-bold text-xl">
                 D
               </div>
-              <span className="font-serif text-xl font-semibold text-slate-800 tracking-wide">
-                Crossing Over <span className="text-brand-600 font-normal text-base">with Dez</span>
+              <span className="font-serif text-xl font-semibold text-slate-800 tracking-wide whitespace-nowrap">
+                Crossing Over<span className="text-brand-600 font-normal text-sm ml-1">with Dez</span>
               </span>
             </button>
           </div>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
             {navLinks.map((link) => (
               <button
                 key={link.value}
@@ -78,7 +78,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
             </button>
           </div>
 
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center lg:hidden">
             <button
               onClick={onOpenSettings}
               className="mr-2 p-2 text-slate-400 hover:text-brand-600 transition-colors"
@@ -109,7 +109,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-b border-gray-100">
+        <div className="lg:hidden bg-white border-b border-gray-100">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
               <button
