@@ -5,7 +5,7 @@ const AboutMe: React.FC = () => {
         <div className="py-8 md:py-16 bg-transparent min-h-screen">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-6 md:mb-12 animate-fade-in-up">
-                    <h2 className="text-base text-white font-semibold tracking-wide uppercase">My Story</h2>
+                    <h2 className="text-base text-white font-semibold tracking-wide uppercase">Dez's Story</h2>
                     <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
                         Empathetic Understanding
                     </p>

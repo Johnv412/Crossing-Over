@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, setView, onOpenSettings })
     { label: 'Services', value: PageView.SERVICES },
     { label: 'Crossing Over Live', value: PageView.COMPANION },
     { label: 'Reviews', value: PageView.REVIEWS },
-    { label: 'My Story', value: PageView.ABOUT },
+    { label: "Dez's Story", value: PageView.ABOUT },
     { label: 'Contact', value: PageView.CONTACT },
   ];
 

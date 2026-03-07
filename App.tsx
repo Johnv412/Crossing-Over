@@ -459,7 +459,7 @@ const App: React.FC = () => {
             </div>
             <div className="px-5 py-2">
               <button onClick={() => navigateTo(PageView.ABOUT)} className="text-base font-bold text-white hover:text-purple-200">
-                My Story
+                Dez's Story
               </button>
             </div>
             <div className="px-5 py-2">
