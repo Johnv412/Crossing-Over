@@ -63,6 +63,7 @@ const GriefCompanion: React.FC = () => {
   const currentTranscriptionRef = useRef('');
 
   useEffect(() => {
+    if (messages.length <= 1) return;
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 

@@ -51,14 +51,14 @@ const Reviews: React.FC<ReviewsProps> = ({ testimonials, onAddReview }) => {
   };
 
   return (
-    <div className="py-16 bg-white/30 backdrop-blur-md min-h-screen">
+    <div className="py-16 bg-transparent min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Community Wall</h2>
-          <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          <h2 className="text-base text-white font-semibold tracking-wide uppercase">Community Wall</h2>
+          <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-white sm:text-4xl">
             Healing & Connection Stories
           </p>
-          <p className="mt-4 max-w-2xl text-xl font-bold text-slate-900 lg:mx-auto">
+          <p className="mt-4 max-w-2xl text-xl font-bold text-white lg:mx-auto">
             Real experiences from people who have found comfort and closure through our sanctuary.
           </p>
           <div className="mt-8">

@@ -209,8 +209,8 @@ const App: React.FC = () => {
         return (
           <div className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen">
             <div className="text-center mb-10">
-              <h1 className="text-3xl font-serif font-bold text-slate-900 sm:text-4xl">Crossing Over Live</h1>
-              <p className="mt-3 max-w-2xl mx-auto text-xl text-slate-500 sm:mt-4">
+              <h1 className="text-3xl font-serif font-bold text-white sm:text-4xl">Crossing Over Live</h1>
+              <p className="mt-3 max-w-2xl mx-auto text-xl text-white sm:mt-4">
                 A safe, judgment-free space to process your emotions.
               </p>
             </div>
@@ -220,14 +220,14 @@ const App: React.FC = () => {
 
       case PageView.SERVICES:
         return (
-          <div className="py-16 bg-white/30 backdrop-blur-md">
+          <div className="py-16 bg-transparent">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center">
-                <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Offerings</h2>
-                <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                <h2 className="text-base text-white font-semibold tracking-wide uppercase">Offerings</h2>
+                <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-white sm:text-4xl">
                   Connect, Heal, and Grow
                 </p>
-                <p className="mt-4 max-w-2xl text-xl font-bold text-slate-900 lg:mx-auto">
+                <p className="mt-4 max-w-2xl text-xl font-bold text-white lg:mx-auto">
                   Choose the path that resonates with your soul's current journey.
                 </p>
               </div>
@@ -326,14 +326,14 @@ const App: React.FC = () => {
             <Hero onCtaClick={() => navigateTo(PageView.SERVICES)} imageUrl={heroImageUrl} />
 
             {/* Value Props Section */}
-            <div className="py-12 bg-white/30 backdrop-blur-md">
+            <div className="py-12 bg-transparent">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="lg:text-center">
-                  <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase">Why Choose Dez</h2>
-                  <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl font-serif">
+                  <h2 className="text-base text-white font-semibold tracking-wide uppercase">Why Choose Dez</h2>
+                  <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl font-serif">
                     A Modern Approach to Ancient Wisdom
                   </p>
-                  <p className="mt-4 max-w-2xl text-xl font-bold text-slate-900 lg:mx-auto">
+                  <p className="mt-4 max-w-2xl text-xl font-bold text-white lg:mx-auto">
                     We blend authentic mediumship with practical grief tools and community support.
                   </p>
                 </div>
@@ -341,13 +341,13 @@ const App: React.FC = () => {
             </div>
 
             {/* Testimonials Preview */}
-            <div className="bg-brand-50/40 backdrop-blur-md py-16">
+            <div className="bg-transparent py-16">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-end mb-12">
-                  <h2 className="text-3xl font-serif font-bold text-slate-900">Healing Stories</h2>
+                  <h2 className="text-3xl font-serif font-bold text-white">Healing Stories</h2>
                   <button
                     onClick={() => navigateTo(PageView.REVIEWS)}
-                    className="text-brand-600 font-bold hover:text-brand-700 transition-colors flex items-center"
+                    className="text-white font-bold hover:text-purple-200 transition-colors flex items-center"
                   >
                     View All Reviews
                     <svg className="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -357,8 +357,8 @@ const App: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {testimonials.slice(0, 3).map((t) => (
-                    <div key={t.id} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                      <p className="text-slate-600 italic mb-4">"{t.text}"</p>
+                    <div key={t.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                      <p className="text-slate-700 italic mb-4">"{t.text}"</p>
                       <div className="flex items-center">
                         <img className="h-10 w-10 rounded-full object-cover bg-slate-100" src={t.avatar} alt={t.name} />
                         <div className="ml-3">
@@ -373,18 +373,18 @@ const App: React.FC = () => {
             </div>
 
             {/* CTA Section */}
-            <div className="bg-brand-700">
+            <div className="bg-transparent">
               <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
                 <h2 className="text-3xl font-extrabold text-white sm:text-4xl font-serif">
                   <span className="block">Ready to connect?</span>
                   <span className="block">Start your journey today.</span>
                 </h2>
-                <p className="mt-4 text-lg leading-6 text-brand-100">
+                <p className="mt-4 text-lg leading-6 text-purple-100">
                   Whether you need a listening ear or a sign from above, we are here for you.
                 </p>
                 <button
                   onClick={() => navigateTo(PageView.COMPANION)}
-                  className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-brand-600 bg-white hover:bg-brand-50 sm:w-auto"
+                  className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-white text-base font-medium rounded-md text-white bg-white/20 hover:bg-white/30 sm:w-auto"
                 >
                   Try Crossing Over Live
                 </button>
@@ -396,7 +396,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-200 selection:text-brand-900 bg-[url('/heavenly-bg.png')] bg-cover bg-center bg-no-repeat bg-fixed">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-200 selection:text-brand-900" style={{ backgroundImage: "url('/Dez-new-PIC.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' }}>
       <Navbar
         currentView={currentView}
         setView={navigateTo}
@@ -421,36 +421,32 @@ const App: React.FC = () => {
 
       <FloatingDez />
 
-      <footer className="bg-white/30 backdrop-blur-md border-t border-slate-200 mt-auto">
+      <footer className="bg-transparent border-t border-white/30 mt-auto">
         <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
           <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
             <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.HOME)} className="text-base font-bold text-slate-900 hover:text-slate-800">
+              <button onClick={() => navigateTo(PageView.HOME)} className="text-base font-bold text-white hover:text-purple-200">
                 Home
               </button>
             </div>
             <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.SERVICES)} className="text-base font-bold text-slate-900 hover:text-slate-800">
+              <button onClick={() => navigateTo(PageView.SERVICES)} className="text-base font-bold text-white hover:text-purple-200">
                 Services
               </button>
             </div>
             <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.ABOUT)} className="text-base font-bold text-slate-900 hover:text-slate-800">
-                About
+              <button onClick={() => navigateTo(PageView.ABOUT)} className="text-base font-bold text-white hover:text-purple-200">
+                My Story
               </button>
             </div>
             <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.CONTACT)} className="text-base font-bold text-slate-900 hover:text-slate-800">
+              <button onClick={() => navigateTo(PageView.CONTACT)} className="text-base font-bold text-white hover:text-purple-200">
                 Contact
               </button>
             </div>
+
             <div className="px-5 py-2">
-              <button onClick={handleResetSettings} className="text-base font-bold text-slate-400 hover:text-slate-600 border border-slate-200 rounded px-2 py-1 text-xs" title="Reset All Settings">
-                Reset Site
-              </button>
-            </div>
-            <div className="px-5 py-2">
-              <button onClick={() => setIsSettingsOpen(true)} className="text-slate-400 hover:text-brand-600 transition-colors rounded-full p-1" title="Site Settings">
+              <button onClick={() => setIsSettingsOpen(true)} className="text-white/50 hover:text-white transition-colors rounded-full p-1" title="Site Settings">
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -459,7 +455,7 @@ const App: React.FC = () => {
             </div>
           </nav>
           <div className="mt-8 flex justify-center space-x-6">
-            <span className="font-bold text-slate-900">
+            <span className="font-bold text-white">
               &copy; 2024 Crossing Over with Dez. All rights reserved.
             </span>
           </div>
