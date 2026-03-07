@@ -41,7 +41,7 @@ const ShootingStars: React.FC = () => {
       y: H * 0.04 + Math.random() * H * 0.82,
       rx: 140 + Math.random() * 320,
       ry: 22 + Math.random() * 90,
-      speed: 0.08 + Math.random() * 0.18,
+      speed: 0.04 + Math.random() * 0.09,
       phase: Math.random() * Math.PI * 2,
       ps: 0.002 + Math.random() * 0.003,
       ba: 0.05 + Math.random() * 0.12,        // richer opacity
@@ -98,7 +98,7 @@ const ShootingStars: React.FC = () => {
     const spawnOrb = () => orbs.push({
       x: W * (0.02 + Math.random() * 0.96),
       y: H * (0.45 + Math.random() * 0.40),
-      vy: 0.25 + Math.random() * 0.55,
+      vy: 0.12 + Math.random() * 0.27,
       r: 2 + Math.random() * 4,
       alpha: 0, maxAlpha: 0.45 + Math.random() * 0.50,
       phase: Math.random() * Math.PI * 2, born: frame,
