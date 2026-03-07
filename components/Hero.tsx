@@ -23,7 +23,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick, imageUrl }) => {
                 <span className="block xl:inline">Healing Hearts,</span>{' '}
                 <span className="block text-brand-600 xl:inline">Guiding Souls.</span>
               </h1>
-              <p className="mt-3 text-base font-bold text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              <p className="mt-3 text-base font-bold text-slate-900 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                 Crossing Over with Dez is your sanctuary for connection. Whether you seek a message from a loved one, grief support, or to awaken your own intuition, you are welcome here.
               </p>
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
