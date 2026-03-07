@@ -340,7 +340,30 @@ const App: React.FC = () => {
               </div>
             </div>
 
+
+            {/* Meet Dez Snippet */}
+            <div className="py-12 bg-transparent">
+              <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
+                  <h2 className="text-base text-brand-600 font-semibold tracking-wide uppercase mb-4">Meet Dez</h2>
+                  <p className="text-lg md:text-xl text-slate-700 font-medium leading-relaxed italic">
+                    "Whether you're seeking connection with a loved one on the other side, clarity around relationships and family decisions, or support in rebuilding your confidence, Dez meets you exactly where you are—with honesty, warmth, and a steady calm that helps you feel safe enough to be yourself."
+                  </p>
+                  <button
+                    onClick={() => navigateTo(PageView.ABOUT)}
+                    className="mt-8 inline-flex items-center px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-full transition-all shadow-md hover:shadow-lg"
+                  >
+                    Read My Full Story
+                    <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
             {/* Testimonials Preview */}
+
             <div className="bg-transparent py-16">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-end mb-12">
