@@ -124,8 +124,7 @@ const Reviews: React.FC<ReviewsProps> = ({ testimonials, onAddReview }) => {
                 <p className="text-slate-600 italic leading-relaxed relative z-10 mb-6">"{t.text}"</p>
               </div>
               <div className="flex items-center pt-6 border-t border-slate-50">
-                <img className="h-12 w-12 rounded-full object-cover shadow-sm bg-slate-100" src={t.avatar} alt={t.name} />
-                <div className="ml-4">
+                <div>
                   <p className="text-base font-bold text-slate-900">{t.name}</p>
                   <p className="text-sm text-brand-500 font-medium">{t.location}</p>
                 </div>

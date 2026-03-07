@@ -10,6 +10,7 @@ import AboutMe from './components/AboutMe';
 import SettingsModal from './components/SettingsModal';
 import Reviews from './components/Reviews';
 import FloatingDez from './components/FloatingDez';
+import ShootingStars from './components/ShootingStars';
 
 const DEFAULT_HERO_IMAGE = "/heavenly-bg.png";
 
@@ -383,8 +384,7 @@ const App: React.FC = () => {
                     <div key={t.id} className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                       <p className="text-slate-700 italic mb-4">"{t.text}"</p>
                       <div className="flex items-center">
-                        <img className="h-10 w-10 rounded-full object-cover bg-slate-100" src={t.avatar} alt={t.name} />
-                        <div className="ml-3">
+                        <div>
                           <p className="text-sm font-medium text-slate-900">{t.name}</p>
                           <p className="text-sm text-slate-500">{t.location}</p>
                         </div>
@@ -419,72 +419,85 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-200 selection:text-brand-900" style={{ backgroundImage: "url('/Dez-new-PIC.jpg')", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' }}>
-      <Navbar
-        currentView={currentView}
-        setView={navigateTo}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-      />
-      {renderContent()}
+    <>
+      <style>{`
+        @keyframes cloudBob {
+          0%   { background-position: center 48%; }
+          50%  { background-position: center 52%; }
+          100% { background-position: center 48%; }
+        }
+        .cloud-bob {
+          animation: cloudBob 12s ease-in-out infinite;
+        }
+      `}</style>
+      <div className="cloud-bob min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-200 selection:text-brand-900" style={{ backgroundImage: "url('/Dez-new-PIC.jpg')", backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' }}>
+        <ShootingStars />
+        <Navbar
+          currentView={currentView}
+          setView={navigateTo}
+          onOpenSettings={() => setIsSettingsOpen(true)}
+        />
+        {renderContent()}
 
-      <SettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        heroImageUrl={heroImageUrl}
-        setHeroImageUrl={setHeroImageUrl}
-        testimonials={testimonials}
-        pendingReviews={pendingReviews}
-        updateTestimonialAvatar={updateTestimonialAvatar}
-        onAddTestimonial={addTestimonial}
-        onDeleteTestimonial={deleteTestimonial}
-        onApproveTestimonial={approveTestimonial}
-        onRejectTestimonial={rejectTestimonial}
-        onReset={handleResetSettings}
-      />
+        <SettingsModal
+          isOpen={isSettingsOpen}
+          onClose={() => setIsSettingsOpen(false)}
+          heroImageUrl={heroImageUrl}
+          setHeroImageUrl={setHeroImageUrl}
+          testimonials={testimonials}
+          pendingReviews={pendingReviews}
+          updateTestimonialAvatar={updateTestimonialAvatar}
+          onAddTestimonial={addTestimonial}
+          onDeleteTestimonial={deleteTestimonial}
+          onApproveTestimonial={approveTestimonial}
+          onRejectTestimonial={rejectTestimonial}
+          onReset={handleResetSettings}
+        />
 
-      <FloatingDez />
+        <FloatingDez />
 
-      <footer className="bg-transparent border-t border-white/30 mt-auto">
-        <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
-          <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
-            <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.HOME)} className="text-base font-bold text-white hover:text-purple-200">
-                Home
-              </button>
-            </div>
-            <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.SERVICES)} className="text-base font-bold text-white hover:text-purple-200">
-                Services
-              </button>
-            </div>
-            <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.ABOUT)} className="text-base font-bold text-white hover:text-purple-200">
-                Dez's Story
-              </button>
-            </div>
-            <div className="px-5 py-2">
-              <button onClick={() => navigateTo(PageView.CONTACT)} className="text-base font-bold text-white hover:text-purple-200">
-                Contact
-              </button>
-            </div>
+        <footer className="bg-transparent border-t border-white/30 mt-auto">
+          <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+              <div className="px-5 py-2">
+                <button onClick={() => navigateTo(PageView.HOME)} className="text-base font-bold text-white hover:text-purple-200">
+                  Home
+                </button>
+              </div>
+              <div className="px-5 py-2">
+                <button onClick={() => navigateTo(PageView.SERVICES)} className="text-base font-bold text-white hover:text-purple-200">
+                  Services
+                </button>
+              </div>
+              <div className="px-5 py-2">
+                <button onClick={() => navigateTo(PageView.ABOUT)} className="text-base font-bold text-white hover:text-purple-200">
+                  Dez's Story
+                </button>
+              </div>
+              <div className="px-5 py-2">
+                <button onClick={() => navigateTo(PageView.CONTACT)} className="text-base font-bold text-white hover:text-purple-200">
+                  Contact
+                </button>
+              </div>
 
-            <div className="px-5 py-2">
-              <button onClick={() => setIsSettingsOpen(true)} className="text-white/50 hover:text-white transition-colors rounded-full p-1" title="Site Settings">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </button>
+              <div className="px-5 py-2">
+                <button onClick={() => setIsSettingsOpen(true)} className="text-white/50 hover:text-white transition-colors rounded-full p-1" title="Site Settings">
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </button>
+              </div>
+            </nav>
+            <div className="mt-8 flex justify-center space-x-6">
+              <span className="font-bold text-white">
+                &copy; 2024 Crossing Over with Dez. All rights reserved.
+              </span>
             </div>
-          </nav>
-          <div className="mt-8 flex justify-center space-x-6">
-            <span className="font-bold text-white">
-              &copy; 2024 Crossing Over with Dez. All rights reserved.
-            </span>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   );
 };
 
