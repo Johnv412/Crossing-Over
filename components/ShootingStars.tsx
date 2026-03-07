@@ -166,7 +166,10 @@ const ShootingStars: React.FC = () => {
     };
 
     /* ── Main loop ───────────────────────────────────────── */
+    let running = true;
+
     const tick = () => {
+      if (!running) return;
       frame++;
       ctx.clearRect(0, 0, W, H);
       wisps.forEach(drawWisp);
@@ -178,11 +181,22 @@ const ShootingStars: React.FC = () => {
     };
     tick();
 
+    // Restart the loop if the browser paused it (tab switch, phone sleep, etc.)
+    const onVisibility = () => {
+      if (document.visibilityState === 'visible') {
+        cancelAnimationFrame(rafRef.current);
+        tick();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
     return () => {
+      running = false;
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('touchmove', onTouch);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
