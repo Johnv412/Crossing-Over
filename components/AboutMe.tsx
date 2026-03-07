@@ -12,7 +12,7 @@ const AboutMe: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                    <div className="prose prose-lg text-black mx-auto font-sans leading-relaxed text-justify">
+                    <div className="prose prose-lg text-slate-900 mx-auto font-sans font-bold leading-relaxed text-justify">
                         <p className="mb-6">
                             Born in Brooklyn and raised in a tight-knit New York family, Dez has always been the person people turn to when life gets complicated—about love, marriage, kids, work, and the quiet doubts you don't say out loud. She somehow knows how to listen, how to talk to people, and how to send them away feeling lighter, more confident, and more hopeful about themselves. Friends, family, customers, and even strangers have come to her for years with the same kinds of questions: "Should I do this? Should I stay? Should I leave? What's the right move?" And again and again, she has had a way of offering the words they needed most in that moment.
                         </p>
