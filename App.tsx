@@ -426,7 +426,7 @@ const App: React.FC = () => {
           100% { background-position: center 54%; }
         }
         .cloud-bob {
-          animation: cloudBob 14s ease-in-out infinite alternate;
+          animation: cloudBob 22s ease-in-out infinite alternate;
         }
       `}</style>
       <div className="cloud-bob min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-200 selection:text-brand-900" style={{ backgroundImage: "url('/Dez-new-PIC.jpg')", backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed' }}>
