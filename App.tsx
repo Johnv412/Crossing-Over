@@ -18,7 +18,7 @@ const App: React.FC = () => {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const [heroImageUrl, setHeroImageUrl] = useState(DEFAULT_HERO_IMAGE);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(TESTIMONIALS);
   const [pendingReviews, setPendingReviews] = useState<Testimonial[]>([]);
 
   // Contact form state
@@ -42,7 +42,7 @@ const App: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           if (data.record) {
-            setTestimonials(data.record.testimonials || []);
+            setTestimonials(data.record.testimonials?.length ? data.record.testimonials : TESTIMONIALS);
             setPendingReviews(data.record.pendingReviews || []);
           }
         } else {
