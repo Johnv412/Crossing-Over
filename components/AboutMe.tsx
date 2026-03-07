@@ -2,17 +2,17 @@ import React from 'react';
 
 const AboutMe: React.FC = () => {
     return (
-        <div className="py-16 bg-transparent min-h-screen">
+        <div className="py-8 md:py-16 bg-transparent min-h-screen">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12 animate-fade-in-up">
+                <div className="text-center mb-6 md:mb-12 animate-fade-in-up">
                     <h2 className="text-base text-white font-semibold tracking-wide uppercase">My Story</h2>
-                    <p className="mt-2 text-4xl leading-8 font-serif font-extrabold tracking-tight text-white sm:text-5xl">
+                    <p className="mt-2 text-3xl leading-8 font-serif font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
                         Empathetic Understanding
                     </p>
                 </div>
 
-                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                    <div className="prose prose-lg text-slate-900 mx-auto font-sans font-bold leading-relaxed text-justify">
+                <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-8 md:p-12">
+                    <div className="prose prose-base sm:prose-lg text-slate-900 mx-auto font-sans font-bold leading-relaxed text-justify">
                         <p className="mb-6">
                             Born in Brooklyn and raised in a tight-knit New York family, Dez has always been the person people turn to when life gets complicated—about love, marriage, kids, work, and the quiet doubts you don't say out loud. She somehow knows how to listen, how to talk to people, and how to send them away feeling lighter, more confident, and more hopeful about themselves. Friends, family, customers, and even strangers have come to her for years with the same kinds of questions: "Should I do this? Should I stay? Should I leave? What's the right move?" And again and again, she has had a way of offering the words they needed most in that moment.
                         </p>
