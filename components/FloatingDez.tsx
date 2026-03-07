@@ -89,10 +89,7 @@ const FloatingDez: React.FC = () => {
 
           @media (max-width: 768px) {
             .floating-dez-container {
-              bottom: 1rem;
-              left: 1rem;
-              width: 120px; /* Mobile size */
-              animation: slideInMobile 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+              display: none;
             }
           }
         `}
