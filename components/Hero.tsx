@@ -35,14 +35,7 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick, imageUrl }) => {
                     Explore Services
                   </button>
                 </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <button
-                    disabled
-                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-slate-400 bg-slate-100 cursor-not-allowed md:py-4 md:text-lg transition-all"
-                  >
-                    Coming Soon
-                  </button>
-                </div>
+
               </div>
             </div>
           </main>
